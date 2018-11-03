@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
@@ -58,9 +58,8 @@ public class BoardManager : MonoBehaviour {
                     toInstantiate = outerWallTiles[Random.Range (0, outerWallTiles.Length)];
                 
                 
-                GameObject instance = Instantiate(toInstantiate, new Vector3(x,y,0f), Quaternion.identity) as GameObject;
-                
-                instance.transform.SetParent(boardHolder);
+                Instantiate(toInstantiate, new Vector3(x,y,0f), Quaternion.identity, boardHolder);
+         
             }
         }
     }
@@ -88,13 +87,17 @@ public class BoardManager : MonoBehaviour {
                 Vector3 randomPosition = RandomPosition();
                 
                 GameObject tileChoice = tileArray[Random.Range (0, tileArray.Length)];
-                
-                Instantiate(tileChoice, randomPosition, Quaternion.identity);
-            }
+
+                Instantiate(tileChoice, randomPosition, Quaternion.identity, boardHolder);
+
+        }
     }
     
     public void SetupScene(int level)
     {
+        if (boardHolder != null)
+            Destroy(boardHolder.gameObject);
+
         BoardSetup();
         InitialiseList();
      
@@ -104,6 +107,6 @@ public class BoardManager : MonoBehaviour {
      
         LayoutObjectAtRandom (enemyTiles, enemyCount, enemyCount);
         
-        Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity);
+        Instantiate (exit, new Vector3 (columns - 1, rows - 1, 0f), Quaternion.identity, boardHolder);
     }
 }
