@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -68,11 +68,18 @@ public class Player : MovingObject {
     {
         if(other.tag == "Exit")
         {
-            Invoke("Restart", restartLevelDelay);
+            Invoke("StartNewLevel", 1.0f);
             enabled = false;
         }
     }
     
+    private void StartNewLevel()
+    {
+        enabled = true;
+        Reset();
+        transform.position = new Vector3(0, 0, 0);
+        GameManager.instance.InitGame();
+    }
     
     
     protected override void OnCantMove <T> (T component)
@@ -82,11 +89,7 @@ public class Player : MovingObject {
         animator.SetTrigger("playerHit");
         
     }
-    
-    private void Restart()
-    {
-        SceneManager.LoadScene (0);
-    }
+   
     
     private void CheckIfGameOver()
     {
