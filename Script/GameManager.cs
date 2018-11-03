@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -27,7 +27,7 @@ public class GameManager : MonoBehaviour {
         InitGame();
     }
     
-    void InitGame()
+    public void InitGame()
     {
         boardScript.SetupScene(level);
         enemies.Clear();
@@ -87,7 +87,13 @@ public class GameManager : MonoBehaviour {
         enemies.Add (script);
         
     }
-    
-    
-    
+
+    public void RemoveEnemyFromList(Enemy script)
+    {
+
+        enemies.Remove(script);
+
+    }
+
+
 }
