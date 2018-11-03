@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ public abstract class MovingObject : MonoBehaviour {
     public LayerMask blockingLayer;
     
     private BoxCollider2D boxCollider;
-    private Rigidbody2D rb2D;
+    protected Rigidbody2D rb2D;
     private float inverseMoveTime;
     
     
@@ -88,4 +88,9 @@ public abstract class MovingObject : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    protected void Reset()
+    {
+        StopAllCoroutines();
+    }
 }
