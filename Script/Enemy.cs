@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -32,9 +32,12 @@ public class Enemy : MovingObject {
         animator.SetTrigger("enemyDmgd");
         
         enemyHp -= loss;
-        
-        if(enemyHp <= 0)
-            gameObject.SetActive(false);
+
+        if (enemyHp <= 0)
+        {
+            GameManager.instance.RemoveEnemyFromList(this);
+            Destroy(gameObject);
+        }
         
     }
     
